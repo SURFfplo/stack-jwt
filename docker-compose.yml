@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+  node:
+    image: 192.87.106.18:56001/node:0.1
+    #image: node:latest
+    labels: 
+      MY_DLO_ENVIRONMENT: development
+      MY_DLO_PURPOSE: jwt context & public key
+    ports:
+      # platform:56000+, dev:57000+, demo:58000+, pilot:59000+
+      - $STACK_PORT:3000
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 256M
+      restart_policy:
+        condition: any
+    networks:
+      - $STACK_NETWORK
+    volumes:
+      #- $PWD/jwt:/home/node/app
+      #- $PWD/startup.sh:/startup.sh
+      - /mnt/nfs/nfsdlo/$STACK_NETWORK/$STACK_SERVICE/$STACK_VERSION/jwt:/home/node/app
+      - /mnt/nfs/nfsdlo/$STACK_NETWORK/$STACK_SERVICE/$STACK_VERSION/tmp/startup.sh:/startup.sh
+
+
+networks:
+  dev-net:
+    external: true
+  test-net:
+    external: true
+  exp-net:
+    external: true
