@@ -22,8 +22,8 @@ services:
       restart_policy:
         condition: any
     environment:
-      KEY_PRIV_FILE: /run/secrets/jwt_key_priv
-      KEY_PUB_FILE: /run/secrets/jwt_key_pub
+      KEY_PRIV_FILE: /var/run/secrets/jwt_key_priv
+      KEY_PUB_FILE: /var/run/secrets/jwt_key_pub
     networks:
       - $STACK_NETWORK
     volumes:
