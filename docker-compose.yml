@@ -6,6 +6,9 @@ services:
     labels: 
       MY_DLO_ENVIRONMENT: development
       MY_DLO_PURPOSE: jwt context & public key
+    secrets:
+      - jwt_key_priv
+      - jwt_key_pub
     ports:
       # platform:56000+, dev:57000+, demo:58000+, pilot:59000+
       - $STACK_PORT:3000
@@ -18,6 +21,9 @@ services:
           memory: 256M
       restart_policy:
         condition: any
+    environment:
+      KEY_PRIV_FILE: /run/secrets/jwt_key_priv
+      KEY_PUB_FILE: /run/secrets/jwt_key_pub
     networks:
       - $STACK_NETWORK
     volumes:
@@ -33,4 +39,10 @@ networks:
   test-net:
     external: true
   exp-net:
+    external: true
+
+secrets:
+  jwt_key_priv:
+    external: true
+  jwt_key_pub:
     external: true
