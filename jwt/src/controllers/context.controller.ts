@@ -107,7 +107,7 @@ export class ContextController {
 					// ##
 					// 4. add context/token to toolurl in output array
 					// ##
-					var contextAndRole = {"https://purl.imsglobal.org/spec/lti/claim/context":{"id":"courseArray[courseItem].courseId","title":"courseArray[courseItem].courseName"}, "https://purl.imsglobal.org/spec/lti/claim/roles":["http://purl.imsglobal.org/vocab/lis/v2/institution/person#Student","http://purl.imsglobal.org/vocab/lis/v2/membership#Learner"]};
+					var contextAndRole = {"https://purl.imsglobal.org/spec/lti/claim/context":{"id":courseArray[courseItem].courseId,"title":courseArray[courseItem].courseName}, "https://purl.imsglobal.org/spec/lti/claim/roles":["http://purl.imsglobal.org/vocab/lis/v2/institution/person#Student","http://purl.imsglobal.org/vocab/lis/v2/membership#Learner"]};
 					var privateKey = fs.readFileSync('src/controllers/config/jwtRS256.key');
 					var token = jwt.sign(contextAndRole, privateKey, { algorithm: 'RS256' });
 
