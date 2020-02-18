@@ -109,7 +109,7 @@ export class ContextController {
 					// ##
 					var contextAndRole = {"https://purl.imsglobal.org/spec/lti/claim/context":{"id":"courseArray[courseItem].courseId","title":"courseArray[courseItem].courseName"}, "https://purl.imsglobal.org/spec/lti/claim/roles":["http://purl.imsglobal.org/vocab/lis/v2/institution/person#Student","http://purl.imsglobal.org/vocab/lis/v2/membership#Learner"]};
 					var privateKey = fs.readFileSync('src/controllers/config/jwtRS256.key');
-					var token = jwt.sign(contextAndRole, privateKey, { algorithm: 'RS256' });
+					var token = jwt.sign(contextAndRole, privateKey, { algorithm: 'RS256', keyid: '123' });
 
 					toolsWithContext[toolsWithContext.length-1].url = toolsWithContext[toolsWithContext.length-1].launch_url + "?context=" + token;
 					var readableContext = JSON.stringify(toolsWithContext[toolsWithContext.length-1]);
