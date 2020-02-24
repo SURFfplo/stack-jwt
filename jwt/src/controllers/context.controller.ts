@@ -125,7 +125,7 @@ export class ContextController {
 	}
 
 	var out = requestWithAwaitMultiple();
-	return out;
+        return JSON.parse(out);
 
   }
 }
