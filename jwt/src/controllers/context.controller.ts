@@ -125,7 +125,9 @@ export class ContextController {
 	}
 
 	var out = requestWithAwaitMultiple();
-        return JSON.parse(out);
+	// cannot cast promise<string> to string...
+        //return JSON.parse(out);
+        return out;
 
   }
 }
