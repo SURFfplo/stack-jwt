@@ -16,6 +16,7 @@ export class ContextController {
 	// TODO: a nice interface where a teacher can add tools to courses
 	var courseTools = Array();
 	courseTools.push({courseId:"1",toolName:"my_first_tool"});
+	courseTools.push({courseId:"1",toolName:"Grasple"});
 
 	// request code to get external data
 	var request = require('request');
