@@ -76,6 +76,7 @@ export class ContextController {
 				courseIdx.push(courseArray[i].courseId);	
 			}
         		console.log("*** found courseArray *** #items:" + courseIdx.length);
+        		//console.log("*** found courseArray *** " + JSON.stringify(courseArray));
 
 			// ##
 			// 2. create tools array from ltilauncher
@@ -90,6 +91,7 @@ export class ContextController {
 				toolIdx.push(toolArray[i].name);	
 			}
         		console.log("*** found toolArray *** #items:" + toolIdx.length);
+        		//console.log("*** found toolArray *** " + JSON.stringify(toolArray));
 
 			// ##
 			// 3. setup toolsWithContext array, based on Course-Tool table
@@ -108,13 +110,14 @@ export class ContextController {
 					// ##
 					// 4. add context/token to toolurl in output array
 					// ##
-					var contextAndRole = {"https://purl.imsglobal.org/spec/lti/claim/context":{"id":"courseArray[courseItem].courseId","title":"courseArray[courseItem].courseName"}, "https://purl.imsglobal.org/spec/lti/claim/roles":["http://purl.imsglobal.org/vocab/lis/v2/institution/person#Student","http://purl.imsglobal.org/vocab/lis/v2/membership#Learner"]};
+					var contextAndRole = "{\"https://purl.imsglobal.org/spec/lti/claim/context\":{\"id\":\""+courseArray[courseItem].courseId+"\",\"title\":\""+courseArray[courseItem].name+"\"},\"https://purl.imsglobal.org/spec/lti/claim/roles\":[\"http://purl.imsglobal.org/vocab/lis/v2/institution/person#Student\",\"http://purl.imsglobal.org/vocab/lis/v2/membership#Learner\"]}";
 					var privateKey = fs.readFileSync('src/controllers/config/jwtRS256.key');
 					var token = jwt.sign(contextAndRole, privateKey, { algorithm: 'RS256', keyid: '123' });
 
 					toolsWithContext[toolsWithContext.length-1].url = toolsWithContext[toolsWithContext.length-1].launch_url + "?context=" + token;
 					var readableContext = JSON.stringify(toolsWithContext[toolsWithContext.length-1]);
-        				console.log("*** created context *** " + readableContext);
+        				console.log("*** created context " + i + " *** " + contextAndRole);
+        				//console.log("*** Output *** " + readableContext);
 				}
 			}
 
